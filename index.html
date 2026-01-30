@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>From My Heart ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+/* 🌊 SOFT BLUE THEME */
+body{
+  background:#4f97df;
+  color:#062a4d;
+  overflow:hidden;
+}
+
+.page{
+  width:100vw;height:100vh;
+  position:absolute;top:0;left:0;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+.page.active{display:flex}
+
+/* floating hearts */
+.hearts{position:fixed;inset:0;z-index:-1}
+.heart{
+  position:absolute;width:18px;height:18px;
+  background:rgba(8,64,132,.25);
+  transform:rotate(45deg);
+  animation:float 18s linear infinite;
+}
+.heart:before,.heart:after{
+  content:'';width:18px;height:18px;
+  background:inherit;border-radius:50%;
+  position:absolute;
+}
+.heart:before{top:-9px}
+.heart:after{left:-9px}
+@keyframes float{
+  from{transform:translateY(110vh) rotate(45deg)}
+  to{transform:translateY(-120vh) rotate(405deg)}
+}
+
+/* button */
+.btn{
+  margin-top:20px;
+  padding:12px 30px;
+  border-radius:30px;
+  border:none;
+  background:linear-gradient(45deg,#4da3ff,#a9d6ff);
+  color:#05305a;
+  font-weight:600;
+  cursor:pointer;
+}
+.next{position:absolute;bottom:20px;right:20px}
+
+/* ===================== PAGE 1 ===================== */
+/* Stylish Royal Photo Card */
+.photo-card{
+  width:250px;height:330px;
+  border-radius:26px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:
+    0 18px 50px rgba(1,10,23,.55),
+    0 0 0 2px rgba(255,255,255,.18),
+    inset 0 0 20px rgba(255,255,255,.25);
+  border:2px solid rgba(255,255,255,.25);
+}
+.photo-card:before{
+  content:'';
+  position:absolute;
+  inset:-4px;
+  border-radius:30px;
+  background:conic-gradient(from 120deg,
+    rgba(255,255,255,.0),
+    rgba(255,255,255,.45),
+    rgba(255,255,255,.0)
+  );
+  filter:blur(1px);
+  animation:shine 3.2s linear infinite;
+  pointer-events:none;
+}
+@keyframes shine{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+.photo-card:after{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:26px;
+  background:radial-gradient(circle at 20% 15%, rgba(255,255,255,.35), transparent 35%);
+  pointer-events:none;
+}
+.photo-card img{width:100%;height:100%;object-fit:cover;position:relative;z-index:1}
+
+/* ===================== PAGE 2 ===================== */
+/* Decorative Frame Slider */
+.frame{
+  width:300px;
+  height:360px;
+  border-radius:34px;
+  padding:16px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  position:relative;
+
+  background:linear-gradient(135deg,#ffffff,#e3f1ff);
+  border:2px solid rgba(255,255,255,.35);
+  box-shadow:
+    0 20px 55px rgba(0,0,0,.28),
+    inset 0 0 18px rgba(100,150,255,.35);
+}
+.frame:before{
+  content:'';
+  position:absolute;
+  inset:-3px;
+  border-radius:38px;
+  background:linear-gradient(135deg,
+    rgba(255,255,255,.0),
+    rgba(255,255,255,.55),
+    rgba(255,255,255,.0)
+  );
+  filter:blur(1px);
+  opacity:.9;
+  pointer-events:none;
+}
+.frame:after{
+  content:'❖';
+  position:absolute;
+  top:10px; left:50%;
+  transform:translateX(-50%);
+  font-size:18px;
+  color:rgba(6,42,77,.45);
+  letter-spacing:6px;
+  text-shadow:0 2px 10px rgba(255,255,255,.6);
+  pointer-events:none;
+}
+
+.inner-slider{
+  display:flex;
+  gap:16px;
+  animation:slide 30s linear infinite;
+  position:relative;
+  z-index:2;
+}
+
+@keyframes slide{
+  from{transform:translateX(100%)}
+  to{transform:translateX(-220%)}
+}
+
+.frame .card{
+  min-width:210px;
+  height:290px;
+  background:#fff;
+  border-radius:22px;
+  padding:7px;
+  box-shadow:0 10px 25px rgba(0,0,0,.14);
+  border:1px solid rgba(0,0,0,.05);
+}
+.frame .card img{
+  width:100%;
+  height:100%;
+  border-radius:16px;
+  object-fit:cover;
+}
+
+/* ===================== PAGE 3 ===================== */
+video{
+  width:90%;max-width:400px;
+  border-radius:20px;
+  box-shadow:0 0 25px rgba(0,0,0,.2);
+}
+
+/* ===================== PAGE 4 ===================== */
+.envelope{
+  width:260px;height:180px;
+  background:#fff;
+  position:relative;
+  border-radius:12px;
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+.envelope .flap{
+  position:absolute;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:#b8dcff;
+  clip-path:polygon(0 0,100% 0,50% 55%);
+  transition:.6s;
+}
+.envelope.open .flap{
+  transform:rotateX(180deg);
+  transform-origin:top;
+}
+.envelope span{
+  position:absolute;
+  bottom:10px;
+  width:100%;
+  text-align:center;
+  font-weight:600;
+}
+
+.paper{
+  width:90%;max-width:420px;
+  background:#fff;
+  padding:20px;
+  border-radius:10px;
+  display:none;
+  margin-top:20px;
+  box-shadow:0 8px 25px rgba(0,0,0,.15);
+  font-family:serif;
+  animation:slideUp .8s ease;
+}
+@keyframes slideUp{
+  from{transform:translateY(40px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+
+/* ===================== PAGE 5 ===================== */
+/* Royal decorative text */
+.big-text{
+  font-family:'Great Vibes',cursive;
+  font-size:2.8rem;
+  text-align:center;
+  opacity:1;
+  padding:18px 18px 10px;
+  border-radius:22px;
+  position:relative;
+  text-shadow:0 10px 30px rgba(0,0,0,.18);
+}
+.big-text:before{
+  content:'';
+  position:absolute;
+  inset:-10px;
+  border-radius:28px;
+  background:linear-gradient(135deg,
+    rgba(255,255,255,.28),
+    rgba(255,255,255,.08),
+    rgba(255,255,255,.22)
+  );
+  box-shadow:
+    0 18px 55px rgba(0,0,0,.18),
+    inset 0 0 20px rgba(255,255,255,.25);
+  z-index:-1;
+}
+.big-text .line{
+  display:block;
+  font-size:2.8rem;
+}
+.big-text .small{
+  font-size:2.1rem;
+}
+
+/* Typewriter cursor */
+#typeText{
+  display:inline-block;
+  border-right:3px solid rgba(6,42,77,.55);
+  padding-right:6px;
+  animation:cursorBlink .8s infinite;
+}
+@keyframes cursorBlink{
+  0%,100%{border-color:transparent}
+  50%{border-color:rgba(6,42,77,.55)}
+}
+
+/* Fireworks layer */
+.fireworks{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:5;
+  overflow:hidden;
+}
+.firework{
+  position:absolute;
+  width:8px;height:8px;
+  border-radius:50%;
+  opacity:0;
+  animation:burst 1.6s ease-out infinite;
+  filter:drop-shadow(0 0 8px rgba(255,255,255,.7));
+}
+@keyframes burst{
+  0%{transform:scale(.2);opacity:0}
+  15%{opacity:1}
+  70%{transform:scale(14);opacity:.8}
+  100%{transform:scale(18);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts"></div>
+
+<audio id="bgMusic" loop>
+  <source src="music.mp3.mpeg" type="audio/mpeg">
+</audio>
+
+<!-- fireworks only for last page -->
+<div class="fireworks" id="fireworks"></div>
+
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+  <div class="photo-card"><img src="p1.jpg"></div>
+  <button class="btn" onclick="playMusic()">Play Music 🎵</button>
+  <button class="btn" onclick="go(2)">Relive Our Story 💙</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+  <div class="frame">
+    <div class="inner-slider">
+      <div class="card"><img src="m1.jpg"></div>
+      <div class="card"><img src="m2.jpg"></div>
+      <div class="card"><img src="m3.jpg"></div>
+      <div class="card"><img src="m4.jpg"></div>
+      <div class="card"><img src="m5.jpg"></div>
+      <div class="card"><img src="m6.jpg"></div>
+    </div>
+  </div>
+  <button class="btn next" onclick="go(3)">Next →</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+  <video id="vid" src="video.mp4" controls></video>
+  <button class="btn next" onclick="go(4)">Next →</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="p4">
+  <div class="envelope" id="env" onclick="openLetter()">
+    <div class="flap"></div>
+    <span>OPEN 💌</span>
+  </div>
+  <div class="paper" id="paper"></div>
+  <button class="btn next" onclick="go(5)">Next →</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="p5">
+  <div class="big-text">
+    <span id="typeText"></span>
+  </div>
+</div>
+
+<script>
+/* hearts */
+for(let i=0;i<30;i++){
+ let h=document.createElement('div');
+ h.className='heart';
+ h.style.left=Math.random()*100+'%';
+ h.style.animationDuration=15+Math.random()*10+'s';
+ document.querySelector('.hearts').appendChild(h);
+}
+
+/* music */
+const bgMusic = document.getElementById("bgMusic");
+
+/* navigation */
+function go(n){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById('p'+n).classList.add('active');
+
+ // page 3 (video) -> music stop
+ if(n==3){
+   bgMusic.pause();
+ }
+
+ // page 4 and others -> music resume
+ if(n==4 || n==5){
+   bgMusic.play().catch(()=>{});
+ }
+
+ // page 5 -> start fireworks + typewriter
+ if(n==5){
+   startFireworks();
+   startTypewriter();
+ }
+}
+
+/* Play Music button */
+function playMusic(){
+  bgMusic.play().catch(()=>{});
+}
+
+/* letter */
+function openLetter(){
+ document.getElementById('env').classList.add('open');
+ let txt= `Dear Bestie,
+
+A friend like you is not once in a million,
+but something far more precious than that.
+I have truly cherished myself whenever I was with you.
+Your love, care, and presence changed my life in the most beautiful way.
+I became a better and happier person because of you.
+
+I know I am really bad at making calls and replying to messages regularly,
+but please believe me when I say this from my heart whenever you need me
+I will always be there for you. 💙
+
+May your wedding be filled with endless love, laughter, and blessings — you truly deserve the happiest life ever. 💍✨
+I’m always proud of you my bestie, and I love you so much — forever by your side, always. 🥹❤️👭🌸`;
+ let p=document.getElementById('paper');
+ p.style.display='block';
+ p.innerHTML='';
+ let i=0;
+ let t=setInterval(()=>{
+   p.innerHTML+=txt.charAt(i);
+   i++;
+   if(i>=txt.length) clearInterval(t);
+ },45);
+}
+
+/* ----------------- PAGE 5 TYPEWRITER ----------------- */
+let typedOnce=false;
+function startTypewriter(){
+  if(typedOnce) return;
+  typedOnce=true;
+
+  const text = "Congratulations from my heart 💙\ On your wedding ✨";
+  const el = document.getElementById("typeText");
+  el.innerHTML = "";
+  let i=0;
+
+  const timer=setInterval(()=>{
+    let ch=text.charAt(i);
+    if(ch === "\n") el.innerHTML += "<br>";
+    else el.innerHTML += ch;
+
+    i++;
+    if(i>=text.length) clearInterval(timer);
+  }, 65);
+}
+
+/* ----------------- FIREWORKS ----------------- */
+let fireworksStarted=false;
+function startFireworks(){
+  if(fireworksStarted) return;
+  fireworksStarted=true;
+
+  const fw = document.getElementById("fireworks");
+
+  // create fireworks particles
+  for(let i=0;i<18;i++){
+    const f=document.createElement("div");
+    f.className="firework";
+    f.style.left = (5 + Math.random()*90) + "%";
+    f.style.top  = (8 + Math.random()*65) + "%";
+    f.style.animationDelay = (Math.random()*1.2) + "s";
+    f.style.background = `radial-gradient(circle, rgba(255,255,255,.95), rgba(255,255,255,0))`;
+    fw.appendChild(f);
+  }
+}
+</script>
+
+</body>
+</html>
