@@ -58,7 +58,11 @@ body{
   font-weight:600;
   cursor:pointer;
 }
-.next{position:absolute;bottom:20px;right:20px}
+.next{
+    position: static;
+    margin: 22px auto 0;
+    display: block;
+}
 
 /* ===================== PAGE 1 ===================== */
 /* Stylish Royal Photo Card */
@@ -428,7 +432,7 @@ function startTypewriter(){
   if(typedOnce) return;
   typedOnce=true;
 
-  const text = "Congratulations from my heart 💙\ On your wedding ✨";
+  const text = "Congratulations from my heart 💙 On your wedding ✨";
   const el = document.getElementById("typeText");
   el.innerHTML = "";
   let i=0;
