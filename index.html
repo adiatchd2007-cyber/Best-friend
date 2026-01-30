@@ -117,7 +117,7 @@ body{
   align-items:center;
   position:relative;
 
-  background:linear-gradient(135deg,#ffffff,#e3f1ff);
+  background:linear-gradient(135deg,#0e99a5,#e3f1ff);
   border:2px solid rgba(255,255,255,.35);
   box-shadow:
     0 20px 55px rgba(0,0,0,.28),
@@ -244,6 +244,11 @@ video{
   line-height:1.15;
   width:92%;
   max-width:420px;
+
+  /* ✅ FIX FOR MOBILE FLICKER */
+  transform:translateZ(0);
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
 }
 .big-text:before{
   content:'';
@@ -273,20 +278,28 @@ video{
     }
   }   
 
-/* Typewriter cursor */
+/* ===================== PAGE 5 TYPEWRITER (FIXED) ===================== */
 #typeText{
-  display:block;              /* inline-block -> block */
-  width:100%;                 /* fixed width so jump na ho */
-  min-height:120px;           /* space reserve (text likhte time hilna band) */
-  border-right:3px solid rgba(6,42,77,.55);
-  padding-right:6px;
-  animation:cursorBlink .8s infinite;
-  white-space:pre-line;       /* \n ko properly handle karega */
+  display:block;
+  width:100%;
+  min-height:120px;
+  white-space:pre-line;
   word-break:break-word;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  will-change: contents;
 }
-@keyframes cursorBlink{
-  0%,100%{border-color:transparent}
-  50%{border-color:rgba(6,42,77,.55)}
+
+#cursor{
+  display:inline-block;
+  margin-left:4px;
+  animation:blink .8s steps(1) infinite;
+  transform:translateZ(0);
+}
+
+@keyframes blink{
+  0%,100%{opacity:0}
+  50%{opacity:1}
 }
 
 /* Fireworks layer */
@@ -366,7 +379,8 @@ video{
 <!-- PAGE 5 -->
 <div class="page" id="p5">
   <div class="big-text">
-    <span id="typeText"></span>
+    <!-- ✅ FIXED TYPEWRITER -->
+    <span id="typeText"><span id="typed"></span><span id="cursor">|</span></span>
   </div>
 </div>
 
@@ -438,21 +452,19 @@ I’m always proud of you my bestie, and I love you so much — forever by your 
  },45);
 }
 
-/* ----------------- PAGE 5 TYPEWRITER ----------------- */
+/* ----------------- PAGE 5 TYPEWRITER (FIXED) ----------------- */
 let typedOnce=false;
 function startTypewriter(){
   if(typedOnce) return;
   typedOnce=true;
 
   const text = "Congratulations from my heart 💙 On your wedding ✨";
-  const el = document.getElementById("typeText");
-  el.innerHTML = "";
+  const el = document.getElementById("typed");
+  el.textContent = "";
+
   let i=0;
-
   const timer=setInterval(()=>{
-    let ch=text.charAt(i);
-    el.textContent +=  ch;
-
+    el.textContent += text.charAt(i);
     i++;
     if(i>=text.length) clearInterval(timer);
   }, 65);
@@ -481,4 +493,3 @@ function startFireworks(){
 
 </body>
 </html>
-
