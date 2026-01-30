@@ -241,6 +241,9 @@ video{
   border-radius:22px;
   position:relative;
   text-shadow:0 10px 30px rgba(0,0,0,.18);
+  line-height:1.15;
+  width:92%;
+  max-width:420px;
 }
 .big-text:before{
   content:'';
@@ -264,13 +267,22 @@ video{
 .big-text .small{
   font-size:2.1rem;
 }
+  @media (max-width:480px){
+    .big-text{
+      font-size:2.2rem;
+    }
+  }   
 
 /* Typewriter cursor */
 #typeText{
-  display:inline-block;
+  display:block;              /* inline-block -> block */
+  width:100%;                 /* fixed width so jump na ho */
+  min-height:120px;           /* space reserve (text likhte time hilna band) */
   border-right:3px solid rgba(6,42,77,.55);
   padding-right:6px;
   animation:cursorBlink .8s infinite;
+  white-space:pre-line;       /* \n ko properly handle karega */
+  word-break:break-word;
 }
 @keyframes cursorBlink{
   0%,100%{border-color:transparent}
@@ -439,8 +451,7 @@ function startTypewriter(){
 
   const timer=setInterval(()=>{
     let ch=text.charAt(i);
-    if(ch === "\n") el.innerHTML += "<br>";
-    else el.innerHTML += ch;
+    el.textContent +=  ch;
 
     i++;
     if(i>=text.length) clearInterval(timer);
@@ -470,3 +481,4 @@ function startFireworks(){
 
 </body>
 </html>
+
